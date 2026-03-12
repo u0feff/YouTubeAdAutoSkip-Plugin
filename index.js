@@ -14,10 +14,10 @@
     const video = document.querySelector(VIDEO_QUERY);
     const player = document.querySelector(PLAYER_QUERY);
 
-    if (!video || !player || !player.classList.contains("ad-showing")) return;
-
-    if (isFinite(video.duration) && video.currentTime < video.duration - 1) {
-      video.currentTime = video.duration - 0.1;
+    if (video && player && player.classList.contains("ad-showing")) {
+      if (isFinite(video.duration) && video.currentTime < video.duration - 1) {
+        video.currentTime = video.duration - 0.1;
+      }
     }
 
     const skipButton = document.querySelector(SKIP_BUTTON_QUERY);

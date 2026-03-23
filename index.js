@@ -81,6 +81,8 @@
    * @returns {boolean}
    */
   function isSkipButton(element) {
+    if (!element.matches) return false;
+
     return element.matches(SKIP_BUTTON_QUERY);
   }
 

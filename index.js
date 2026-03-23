@@ -199,7 +199,7 @@
     // Fallback
     if (
       video &&
-      video.currentTime < 3 &&
+      video.currentTime > 3 &&
       trySkipViaPlayerReload(player) === true
     )
       return;

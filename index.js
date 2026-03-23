@@ -144,9 +144,6 @@
    * @returns {boolean}
    */
   function trySkipViaPlayerReload(player) {
-    // FIXME: infinite loop at end and when ad constantly loads on reload
-    return false;
-
     log(`Trying to skip via player reload`);
 
     const videoData = player.getVideoData();
@@ -160,7 +157,7 @@
     } else if ("loadVideoByPlayerVars" in player) {
       player.loadVideoByPlayerVars(playerVars);
     } else {
-      log(`Cannot find video reload function`);
+      log(`Cannot find load video function`);
       return false;
     }
 
@@ -190,12 +187,22 @@
 
     if (player.classList.contains("ad-showing") === false) return;
 
+    log(`Ad playback detected`);
+
+    /** @type {HTMLVideoElement} */ const video =
+      section.querySelector(VIDEO_QUERY);
     /** @type {HTMLButtonElement} */ const skipButton =
       section.querySelector(SKIP_BUTTON_QUERY);
 
     if (skipButton && trySkipViaSkipButtonClick(skipButton) === true) return;
 
-    if (player && trySkipViaPlayerReload(player)) return;
+    // Fallback
+    if (
+      video &&
+      video.currentTime < 3 &&
+      trySkipViaPlayerReload(player) === true
+    )
+      return;
   }
 
   document.addEventListener("DOMContentLoaded", (event) => {

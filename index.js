@@ -60,7 +60,9 @@
             newDesc.value = value;
           }
 
-          if (desc.set || desc.value) newDesc.writable = true;
+          if (desc.set || desc.value) {
+            newDesc.writable = true;
+          }
 
           propertyDescriptors[key] = newDesc;
         } catch (e) {

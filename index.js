@@ -214,8 +214,6 @@
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    setInterval(function () {
-      trySkip();
-    }, 500);
+    setInterval(trySkip, 500);
   });
 })();
